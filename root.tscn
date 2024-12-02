@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://cchnctxx47w2m"]
+
+[ext_resource type="Texture2D" uid="uid://bnkg2ues3d1aa" path="res://Skyscrapers.png" id="1_exxrt"]
+[ext_resource type="Texture2D" uid="uid://dclwnbua6k4w4" path="res://Sky.png" id="1_nddcl"]
+[ext_resource type="Texture2D" uid="uid://dtxqib3f0k7eu" path="res://Road.png" id="2_2gylw"]
+[ext_resource type="Shader" path="res://blur.gdshader" id="3_pcw3q"]
+[ext_resource type="Texture2D" uid="uid://x2441lanh0q1" path="res://Foreground.png" id="3_thsiy"]
+[ext_resource type="Script" path="res://scroll_controller.gd" id="4_xejmu"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ri4d5"]
+blend_mode = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fleoc"]
+shader = ExtResource("3_pcw3q")
+shader_parameter/radius = 4.0
+
+[node name="root" type="Node2D"]
+position = Vector2(576, 324)
+
+[node name="Scroll Controller" type="Node2D" parent="."]
+script = ExtResource("4_xejmu")
+
+[node name="Camera2D" type="Camera2D" parent="Scroll Controller"]
+
+[node name="Parallax" type="Node2D" parent="."]
+
+[node name="Parallax2D_Skyscrapers" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(0.2, 0)
+scroll_offset = Vector2(0, 110)
+repeat_size = Vector2(720, 0)
+repeat_times = 3
+
+[node name="Sky" type="Sprite2D" parent="Parallax/Parallax2D_Skyscrapers"]
+position = Vector2(1, -288.766)
+scale = Vector2(1.92, 0.532228)
+texture = ExtResource("1_nddcl")
+
+[node name="Skyscrapers" type="Sprite2D" parent="Parallax/Parallax2D_Skyscrapers"]
+self_modulate = Color(0.74, 0.74, 0.74, 0.639216)
+material = SubResource("CanvasItemMaterial_ri4d5")
+scale = Vector2(1.2, 1.5)
+texture = ExtResource("1_exxrt")
+
+[node name="Parallax2D_Road" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(1, 0)
+scroll_offset = Vector2(0, 70)
+repeat_size = Vector2(480, 0)
+repeat_times = 3
+
+[node name="Road" type="Sprite2D" parent="Parallax/Parallax2D_Road"]
+scale = Vector2(0.8, 1)
+texture = ExtResource("2_2gylw")
+
+[node name="Parallax2D_Foreground" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(2, 0)
+scroll_offset = Vector2(0, 125)
+repeat_size = Vector2(599, 0)
+repeat_times = 3
+
+[node name="Foreground" type="Sprite2D" parent="Parallax/Parallax2D_Foreground"]
+modulate = Color(1, 1, 1, 0.47451)
+material = SubResource("ShaderMaterial_fleoc")
+texture = ExtResource("3_thsiy")
